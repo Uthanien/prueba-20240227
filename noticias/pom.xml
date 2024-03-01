@@ -6,10 +6,10 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.2.3</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
     <groupId>cl.fespi.noticias</groupId>
-    <artifactId>noticias</artifactId>
+    <artifactId>api-noticias-backend</artifactId>
     <version>v1.0.0</version>
     <name>noticias</name>
     <description>Proyecto de gestión de noticias</description>
