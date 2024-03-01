@@ -1,6 +1,7 @@
 package cl.fespi.noticias.noticias.repository;
 
 import cl.fespi.noticias.noticias.entity.Noticia;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
  /* 
@@ -13,4 +14,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface INoticiaRepository extends JpaRepository<Noticia, Long> {
+    public List<Noticia> findByIsFavorito(Boolean isFavorito);
+    public Noticia findByTitulo(String titulo);
+    public List<Noticia> findByIsFavoritoOrderByFechaPublicacionDesc(Boolean isFavorito);
 }

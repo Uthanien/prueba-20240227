@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,6 +46,35 @@ public class NoticiasController {
     public ResponseEntity<GenericResponse> listarNoticiasFavoritas(){
         log.info("Llamada GET /api/v1/favoritos");
         return registroService.listarNoticiasFavoritas();
+    }
+    
+    /**
+     * Metodo que retorna el listado de noticias favoritas por fecha
+     * 
+     * @return 
+     */
+    @Operation(summary = "Listado de noticias favoritas por fecha.", 
+            description = "Metodo que retorna el listado de noticias favoritas por fecha.")
+    @GetMapping(value = "/favoritosPorFecha", 
+            produces = { "application/json" })
+    public ResponseEntity<GenericResponse> listarNoticiasFavoritasPorFecha(){
+        log.info("Llamada GET /api/v1/favoritosPorFecha");
+        return registroService.listarNoticiasFavoritasPorFecha();
+    }
+    
+    /**
+     * Metodo que retorna la noticia favorita por el titulo
+     * 
+     * @param titulo
+     * @return 
+     */
+    @Operation(summary = "Noticia favorita por titulo.", 
+            description = "Metodo que retorna la noticia favorita por titulo.")
+    @GetMapping(value = "/favoritosPorTitulo", 
+            produces = { "application/json" })
+    public ResponseEntity<GenericResponse> listarNoticiaFavoritaPorTitulo(@RequestBody Map<String, Object> titulo){
+        log.info("Llamada GET /api/v1/favoritosPorTitulo " + titulo.get("titulo").toString());
+        return registroService.buscarNoticiaFavoritaPorTitulo(titulo.get("titulo").toString());
     }
     
     /**

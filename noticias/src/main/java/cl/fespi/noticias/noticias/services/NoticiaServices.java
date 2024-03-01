@@ -27,25 +27,24 @@ public class NoticiaServices implements INoticiaServices {
 
     @Override
     public ResponseEntity<GenericResponse> listarNoticiasFavoritas() {
-        // TODO listar noticias con isFavorito en true
-        return new ResponseEntity(genericResponse.buildResponse(noticiasRepository.findAll()), HttpStatus.OK);
+        return new ResponseEntity(genericResponse.buildResponse(noticiasRepository.findByIsFavorito(Boolean.TRUE)), HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<GenericResponse> listarNoticiasFavoritasPorFecha() {
-        return null;
+        return new ResponseEntity(genericResponse.buildResponse(noticiasRepository.findByIsFavoritoOrderByFechaPublicacionDesc(true)), HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<GenericResponse> buscarNoticiaFavoritaPorTitulo(String titulo) {
-        return null;
+        return new ResponseEntity(genericResponse.buildResponse(noticiasRepository.findByTitulo(titulo)), HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<GenericResponse> guardarNoticiaFavorita(Noticia noticia) {
         noticia.setIdNoticia(null);
         noticiasRepository.save(noticia);
-        return new ResponseEntity(genericResponse.buildResponse(null), HttpStatus.OK);
+        return new ResponseEntity(genericResponse.buildResponse(null), HttpStatus.CREATED);
 
     }
 
@@ -53,7 +52,7 @@ public class NoticiaServices implements INoticiaServices {
     public ResponseEntity<GenericResponse> borrarNoticiaFavorita(Noticia noticia) {
         noticia.setIsFavorito(false);
         noticiasRepository.save(noticia);
-        return new ResponseEntity(genericResponse.buildResponse(null), HttpStatus.OK);
+        return new ResponseEntity(genericResponse.buildResponse(null), HttpStatus.ACCEPTED);
     }
 
 }

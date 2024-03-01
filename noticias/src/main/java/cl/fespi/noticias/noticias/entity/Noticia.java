@@ -28,7 +28,7 @@ import lombok.NoArgsConstructor;
 public class Noticia {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idNoticia;
     private String titulo;
     private String descripcion;
