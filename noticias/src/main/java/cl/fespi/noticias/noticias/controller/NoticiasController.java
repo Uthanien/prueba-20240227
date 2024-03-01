@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class NoticiasController {
     
     @Autowired
-    private INoticiaServices registroService;  
+    private INoticiaServices noticiaService;  
     
     /**
      * Metodo que retorna el listado de noticias favoritas
@@ -46,7 +46,7 @@ public class NoticiasController {
             produces = { "application/json" })
     public ResponseEntity<GenericResponse> listarNoticiasFavoritas(){
         log.info("Llamada GET /api/v1/favoritos");
-        return registroService.listarNoticiasFavoritas();
+        return noticiaService.listarNoticiasFavoritas();
     }
     
     /**
@@ -60,7 +60,7 @@ public class NoticiasController {
             produces = { "application/json" })
     public ResponseEntity<GenericResponse> listarNoticiasFavoritasPorFecha(){
         log.info("Llamada GET /api/v1/favoritosPorFecha");
-        return registroService.listarNoticiasFavoritasPorFecha();
+        return noticiaService.listarNoticiasFavoritasPorFecha();
     }
     
     /**
@@ -75,7 +75,7 @@ public class NoticiasController {
             produces = { "application/json" })
     public ResponseEntity<GenericResponse> listarNoticiaFavoritaPorTitulo(@RequestBody Map<String, Object> titulo){
         log.info("Llamada GET /api/v1/favoritosPorTitulo " + titulo.get("titulo").toString());
-        return registroService.buscarNoticiaFavoritaPorTitulo(titulo.get("titulo").toString());
+        return noticiaService.buscarNoticiaFavoritaPorTitulo(titulo.get("titulo").toString());
     }
     
     /**
@@ -88,7 +88,7 @@ public class NoticiasController {
     @PostMapping(value = "/favorito", produces = { "application/json" }, consumes = { "application/json" })
     public ResponseEntity<GenericResponse> agregaNoticiaFavorita(@RequestBody Noticia noticia){
         log.info("Llamada POST /api/v1/favorito");
-        return registroService.guardarNoticiaFavorita(noticia);
+        return noticiaService.guardarNoticiaFavorita(noticia);
     }
     
     /**
@@ -101,6 +101,6 @@ public class NoticiasController {
     @DeleteMapping(value = "/favorito/{id}", produces = { "application/json" }, consumes = { "application/json" })
     public ResponseEntity<GenericResponse> borrarNoticiaFavorita(@PathVariable Long id){
         log.info("Llamada DELETE /api/v1/favorito");
-        return registroService.borrarNoticiaFavorita(id);
+        return noticiaService.borrarNoticiaFavorita(id);
     }
 }
