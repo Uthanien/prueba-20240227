@@ -17,7 +17,7 @@ public interface INoticiaServices {
     public ResponseEntity<GenericResponse> listarNoticiasFavoritasPorFecha();
     public ResponseEntity<GenericResponse> buscarNoticiaFavoritaPorTitulo(String titulo);
     public ResponseEntity<GenericResponse> guardarNoticiaFavorita(Noticia noticia);
-    public ResponseEntity<GenericResponse> borrarNoticiaFavorita(Noticia noticia);
+    public ResponseEntity<GenericResponse> borrarNoticiaFavorita(Long id);
     
     
 }

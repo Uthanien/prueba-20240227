@@ -49,9 +49,10 @@ public class NoticiaServices implements INoticiaServices {
     }
 
     @Override
-    public ResponseEntity<GenericResponse> borrarNoticiaFavorita(Noticia noticia) {
-        noticia.setIsFavorito(false);
-        noticiasRepository.save(noticia);
+    public ResponseEntity<GenericResponse> borrarNoticiaFavorita(Long id) {
+        Noticia not = noticiasRepository.findById(id).get();
+        not.setIsFavorito(false);
+        noticiasRepository.save(not);
         return new ResponseEntity(genericResponse.buildResponse(null), HttpStatus.ACCEPTED);
     }
 
