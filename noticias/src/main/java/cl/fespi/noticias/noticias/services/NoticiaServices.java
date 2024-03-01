@@ -9,26 +9,26 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
- /* 
+/* 
  * 
  * @version     1.0.0 27-02-2024
  * @author      Felipe Espinosa C.
  * @since       1.0.0 27-02-2024
  * 
  */
-
 @Service
 public class NoticiaServices implements INoticiaServices {
-    
+
     @Autowired
     private INoticiaRepository noticiasRepository;
-    
+
     @Autowired
     private GenericResponseFactory genericResponse;
 
     @Override
     public ResponseEntity<GenericResponse> listarNoticiasFavoritas() {
-        return new ResponseEntity(genericResponse.buildResponse(noticiasRepository.findAll()), HttpStatus.OK);      
+        // TODO listar noticias con isFavorito en true
+        return new ResponseEntity(genericResponse.buildResponse(noticiasRepository.findAll()), HttpStatus.OK);
     }
 
     @Override
@@ -43,15 +43,17 @@ public class NoticiaServices implements INoticiaServices {
 
     @Override
     public ResponseEntity<GenericResponse> guardarNoticiaFavorita(Noticia noticia) {
+        noticia.setIdNoticia(null);
         noticiasRepository.save(noticia);
         return new ResponseEntity(genericResponse.buildResponse(null), HttpStatus.OK);
-        
+
     }
 
     @Override
     public ResponseEntity<GenericResponse> borrarNoticiaFavorita(Noticia noticia) {
+        noticia.setIsFavorito(false);
         noticiasRepository.save(noticia);
         return new ResponseEntity(genericResponse.buildResponse(null), HttpStatus.OK);
     }
-    
+
 }
